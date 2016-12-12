@@ -10,7 +10,7 @@ COPY php.ini /etc/php5/cli/php.ini
 COPY php.ini /etc/php5/apache2/php.ini
 
 # add some confs
-COPY xhprof_vhost.conf.tpl /etc/apache2/sites-enabled/
+COPY xhprof_vhost.conf.tpl /etc/apache2/sites-enabled/000-default.conf.tpl
 COPY config.php.tpl /opt/xhprof/xhprof_lib/
 RUN rm /etc/apache2/sites-enabled/000-default
 

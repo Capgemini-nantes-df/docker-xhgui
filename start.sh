@@ -4,7 +4,7 @@ set -e
 
 # render config templates
 envtpl /opt/xhprof/xhprof_lib/config.php.tpl
-envtpl /etc/apache2/sites-enabled/xhprof_vhost.conf.tpl
+envtpl /etc/apache2/sites-enabled/000-default.conf.tpl
 
 [ -n "$HTTP_AUTH_USER" ] && htpasswd -cb /etc/apache2/htpasswd "$HTTP_AUTH_USER" "$HTTP_AUTH_PASS"
 
