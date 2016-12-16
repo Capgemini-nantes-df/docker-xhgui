@@ -24,6 +24,7 @@ RUN pip install envtpl==0.2.1
 COPY start.sh /bin/
 RUN chmod +x /bin/start.sh
 
+VOLUME /var/lib/mysql
 EXPOSE 3306 80
 
 CMD /bin/start.sh
