@@ -3,8 +3,13 @@
 set -e
 
 # render config templates
-envtpl /opt/xhprof/xhprof_lib/config.php.tpl
-envtpl /etc/apache2/sites-enabled/000-default.conf.tpl
+if [ -f /opt/xhprof/xhprof_lib/config.php.tpl ]; then
+    envtpl /opt/xhprof/xhprof_lib/config.php.tpl
+fi
+
+if [ -f /etc/apache2/sites-enabled/000-default.conf.tpl ]; then
+    envtpl /etc/apache2/sites-enabled/000-default.conf.tpl
+fi
 
 [ -n "$HTTP_AUTH_USER" ] && htpasswd -cb /etc/apache2/htpasswd "$HTTP_AUTH_USER" "$HTTP_AUTH_PASS"
 
