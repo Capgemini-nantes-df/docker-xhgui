@@ -21,7 +21,7 @@ mysql_install_db --user=mysql
 
 # start mysql in the background while we create user accounts
 mysqld_safe &
-while ! nc -zv localhost 3306
+while ! mysqladmin ping --silent
 do
     sleep 1
 done
@@ -32,12 +32,12 @@ if ! mysql -e 'use xhprof'; then
     mysql xhprof < /tmp/schema.sql
 
     # disable remote root login
-    echo "DELETE FROM user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')" | mysql mysql
-    echo "FLUSH PRIVILEGES" | mysql
+    #echo "DELETE FROM user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')" | mysql mysql
+    #echo "FLUSH PRIVILEGES" | mysql
 
     # create new user
-    echo "GRANT ALL ON xhprof.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS'" | mysql xhprof
-    echo "GRANT ALL ON xhprof.* TO '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS'" | mysql xhprof
+    echo "GRANT ALL ON xhprof.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS'" | mysql
+    echo "GRANT ALL ON xhprof.* TO '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS'" | mysql
 else
     echo "DATABASE xhprof already exists"
 fi
